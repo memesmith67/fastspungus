@@ -4,7 +4,6 @@ print "void* "$1"(void* i){;int s=1;";
 print "while(s){switch(s){default:"}
 {if($1=="declare"){p=$2" "$3";"}
 else if($1=="assign"){p=$2"="$3$4$5";"}
-else if($1=="malloc"){p=$2"="$1"("$3");"}
 else if($1=="free"){p=$1"("$2");"}
 else if($1=="case"){p=$1" "$2":"}
 else if($1=="break"){p=$1";"}
