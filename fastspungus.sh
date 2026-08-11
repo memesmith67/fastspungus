@@ -6,7 +6,7 @@ q=1;a=$1;b=$2;c=$3;
 f("function","void* "b"(void* "c"){")
 f("declare",b" "c";")
 f("assign",b"="c$4$5";")
-f("free(",a b");")
+f("call",b"("c");")
 f("case",a" "b":")
 f("break;",a)
 f("while(",a b"){")
