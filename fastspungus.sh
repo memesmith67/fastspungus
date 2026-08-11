@@ -10,7 +10,7 @@ f("free(",a b");")
 f("case",a" "b":")
 f("break;",a")
 f("while(",a b"){")
-f("switch",a b"){")
+f("switch(",a b"){")
 f("}",a)
 f("default:",a)
 if(q||b c$5!~/^[a-zA-Z0-9_()*]*$/||
