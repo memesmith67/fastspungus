@@ -1,8 +1,7 @@
 #copyright john morris beck 2026 gpl2
 fastspungus(){ awk '
-function fail(){print ";=;";exit 1}
-function n(x){if(x~/^[a-zA-Z0-9_*]+$/){return x}else{fail()}}
-function o(x){if(x~/^[<>\/*%&|!=|+-]+$/){return x}else{fail()}}
+function n(x){return x~/^[a-zA-Z0-9_*]+$/?x:";=;"}
+function o(x){return x~/^[<>\/*%&|!=|+-]+$/?x:";=;"}
 $0=="fastspungus"{s=!s;next}!s;s{
 q=1;a=$1;b=n($2);c=n($3);
 if("function"==$1){print "void* "b"(void* "c"){"}
@@ -18,5 +17,5 @@ else if("while"==$1){print a"(("b")"c"){"}
 else if("switch"==$1){print a"(("b")"c"){"}
 else if("}"==$1){print a}
 else if("default:"==$1){print a}
-else{fail()}
+else{print ";=;"}
 }';};
