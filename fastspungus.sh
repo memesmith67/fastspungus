@@ -1,7 +1,7 @@
 #copyright john morris beck 2026 gpl2
 fastspungus(){ awk '
 function n(x){return x~/^[a-zA-Z0-9_*]+$/?x:";=;"}
-function o(x){return x~/^[<>\/*%&|!=|+-]+$/?x:";=;"}
+function o(x){return x~/^[<>\/*%&|!=|+\-]+$/?x:";=;"}
 $0=="fastspungus"{s=!s;next}!s;s{
 q=1;a=$1;b=n($2);c=n($3);
 if("function"==$1){print "void* "b"(void* "c"){"}
