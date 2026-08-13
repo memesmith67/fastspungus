@@ -1,6 +1,6 @@
-w#copyright john morris beck 2026 gpl2
+#copyright john morris beck 2026 gpl2
 fastspungus(){ awk '
-function n(x){return x~/^[a-zA-Z0-9_'\'',]+$/?x:";=;"}
+function n(x){return x~/^[a-zA-Z0-9_,]+$/?x:";=;"}
 function t(x){return x~/^[a-zA-Z0-9_*]+$/?x:";=;"}
 function o(x){return x~/^[<>\/*%&|!=|+\-]+$/?x:";=;"}
 $0=="fastspungus"{s=!s;next}!s;s{
