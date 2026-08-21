@@ -3,7 +3,7 @@ fastspungus(){ awk '
 function t(x){return x~/^[a-zA-Z0-9_*]+$/?x:e}
 function n(x){return x~/^[a-zA-Z0-9_]+$/?x:e}
 function o(x){return x~/^[+\-<>\/*%&|!=]+$/?x:e}
-$0=="fastspungus"{s=!s}!s;s{e=";=";a=$1;b=n($2);c=n($3);
+$0=="fastspungus"{s=!s;next}!s;s{e=";=";a=$1;b=n($2);c=n($3);
 if("function"==$1){print t($2)" "c"("t($4)" "n($5)"){"}
 else if("declare"==$1){print t($2)" "c"=0;"}
 else if("cast"==$1){print b"=("t($3)")"n($4)";"}
