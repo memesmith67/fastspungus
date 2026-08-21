@@ -1486,3 +1486,478 @@ STACKING ABSTRACTIONS: 4K REGIONS CARRYING FASTSPUNGUS
 
     Same source. Four stacked abstractions (fastspungus → C → mmap → OS).
     Every layer is portable. The whole stack is portable.
+
+    the following specification was written by chatgpt on 8/21/2026
+
+    # Fastspungus Language Specification
+
+## Version 1.0
+
+Copyright John Morris Beck 2026
+Licensed under GPLv2
+
+---
+
+# 1. Overview
+
+Fastspungus is a minimal low-level programming language designed as a portable, architecture-independent systems programming language.
+
+Fastspungus defines a restricted semantic subset of C/C++ concepts:
+
+* typed variables
+* explicit memory access
+* arithmetic operations
+* control flow
+* function calls
+* compile-time metaprogramming hooks
+
+Fastspungus programs are translated into portable C/C++ source code.
+
+Fastspungus is designed to function as a human-readable abstract assembly language.
+
+---
+
+# 2. Design Goals
+
+Fastspungus prioritizes:
+
+## 2.1 Portability
+
+A valid Fastspungus program shall have identical observable behavior on all conforming targets.
+
+Architecture-specific details are delegated to the C/C++ compiler backend.
+
+Fastspungus does not expose:
+
+* CPU registers
+* instruction sets
+* calling conventions
+* stack layout
+* cache behavior
+
+---
+
+## 2.2 Explicit Semantics
+
+Fastspungus has no implicit:
+
+* memory allocation
+* garbage collection
+* exceptions
+* hidden control flow
+* runtime services
+
+All operations must be explicitly represented.
+
+---
+
+## 2.3 Safety
+
+Fastspungus avoids undefined C/C++ behavior by restricting the generated code.
+
+Implementations should reject invalid programs rather than silently generate incorrect code.
+
+---
+
+# 3. Program Structure
+
+A Fastspungus program consists of zero or more Fastspungus blocks embedded inside C/C++ source.
+
+A block begins and ends with the keyword:
+
+```
+fastspungus
+```
+
+Example:
+
+```
+#include <stdio.h>
+
+fastspungus
+
+declare int value
+assign value 5 + 3
+
+fastspungus
+```
+
+Text outside Fastspungus blocks is passed through unchanged.
+
+---
+
+# 4. Lexical Rules
+
+## 4.1 Identifiers
+
+Identifiers consist of:
+
+```
+[a-zA-Z0-9_]
+```
+
+Identifiers shall not contain:
+
+* whitespace
+* punctuation
+* operators
+
+---
+
+## 4.2 Types
+
+Types consist of:
+
+```
+[a-zA-Z0-9_*]
+```
+
+Examples:
+
+```
+int
+char
+void*
+```
+
+---
+
+## 4.3 Operators
+
+The following operators are supported:
+
+```
++
+-
+<
+>
+/
+*
+%
+&
+|
+!=
+=
+```
+
+---
+
+# 5. Variables
+
+Variables are declared using:
+
+```
+declare TYPE NAME
+```
+
+Example:
+
+```
+declare int counter
+```
+
+Equivalent C:
+
+```c
+int counter = 0;
+```
+
+All declared variables are initialized to zero.
+
+---
+
+# 6. Assignment
+
+Syntax:
+
+```
+assign DEST SOURCE OP VALUE
+```
+
+Example:
+
+```
+assign result a + b
+```
+
+Equivalent C:
+
+```c
+result = a + b;
+```
+
+---
+
+# 7. Memory Operations
+
+## 7.1 Read Memory
+
+Syntax:
+
+```
+get DEST ADDRESS
+```
+
+Example:
+
+```
+get value ptr
+```
+
+Equivalent C:
+
+```c
+value = *ptr;
+```
+
+---
+
+## 7.2 Write Memory
+
+Syntax:
+
+```
+set ADDRESS VALUE
+```
+
+Example:
+
+```
+set ptr 42
+```
+
+Equivalent C:
+
+```c
+*ptr = 42;
+```
+
+---
+
+# 8. Functions
+
+Functions are declared:
+
+```
+function NAME RETURN_TYPE (PARAM TYPE...)
+```
+
+Example:
+
+```
+function add int (a int b int)
+```
+
+Equivalent C:
+
+```c
+int add(int a, int b)
+{
+}
+```
+
+Functions are the primary unit of reusable abstraction.
+
+A Fastspungus function shall not depend on architecture-specific behavior unless explicitly provided through external C code.
+
+---
+
+# 9. Function Calls
+
+Syntax:
+
+```
+call RESULT FUNCTION(ARGUMENTS)
+```
+
+Example:
+
+```
+call result add(x y)
+```
+
+Equivalent C:
+
+```c
+result = add(x,y);
+```
+
+---
+
+# 10. Control Flow
+
+## 10.1 While Loop
+
+Syntax:
+
+```
+while CONDITION
+    statements
+end
+```
+
+Equivalent C:
+
+```c
+while(CONDITION)
+{
+    statements
+}
+```
+
+---
+
+## 10.2 Switch
+
+Syntax:
+
+```
+switch VALUE
+
+case LABEL
+
+break
+
+default
+
+end
+```
+
+Equivalent C:
+
+```c
+switch(VALUE)
+{
+case LABEL:
+break;
+
+default:
+}
+```
+
+---
+
+# 11. Return
+
+A function returns using:
+
+```
+return VALUE
+```
+
+Example:
+
+```
+return result
+```
+
+---
+
+# 12. Compile-Time Metaprogramming
+
+Fastspungus provides the SUBLEQ primitive.
+
+Syntax:
+
+```
+subleq
+```
+
+The SUBLEQ primitive generates a minimal subtract-and-branch virtual machine.
+
+The intended use is:
+
+* compile-time generation
+* DSL interpretation
+* code transformation
+
+Runtime use is permitted but not required.
+
+---
+
+# 13. Error Handling
+
+An implementation shall reject invalid syntax.
+
+Invalid programs shall not silently produce valid output.
+
+Recommended behavior:
+
+Generate an invalid C token that forces compilation failure.
+
+Example:
+
+```
+;=
+```
+
+---
+
+# 14. Memory Model
+
+Fastspungus uses the C abstract machine memory model.
+
+A conforming implementation shall preserve:
+
+* object lifetime rules
+* alignment requirements
+* pointer validity
+* integer semantics
+
+Fastspungus does not define:
+
+* physical addresses
+* cache behavior
+* register allocation
+* instruction ordering
+
+---
+
+# 15. External Interface
+
+Fastspungus may interact with external C/C++ code.
+
+External code may provide:
+
+* hardware access
+* operating system interfaces
+* atomic operations
+* platform-specific functions
+
+Fastspungus functions remain portable when their interfaces remain portable.
+
+---
+
+# 16. Implementation Requirements
+
+A Fastspungus implementation must:
+
+1. Recognize valid Fastspungus syntax.
+2. Preserve C/C++ code outside Fastspungus blocks.
+3. Generate semantically equivalent C/C++.
+4. Reject invalid syntax.
+5. Preserve function and memory semantics.
+
+---
+
+# 17. Philosophy
+
+Fastspungus does not attempt to replace C.
+
+Fastspungus defines a smaller, more predictable language layer above C.
+
+The compiler backend handles:
+
+* optimization
+* instruction selection
+* ABI compatibility
+* machine-specific generation
+
+Fastspungus defines:
+
+* portable algorithms
+* explicit operations
+* reusable low-level abstractions
+
+The fundamental unit of portability is the function.
+
