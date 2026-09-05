@@ -18,6 +18,6 @@ else if("while"==$1){e=a"("b"){"}
 else if("switch"==$1){e=a"("b"){"}
 else if("end"==$1){e="}"}
 else if("default"==$1){e=a":"}
-else if("subleq"==$1){e="void "$1"(int *m){int t=*m;"
+else if("subleq"==$1){e="void "$1"(int *m){int t=*m;";
 e=e"*m=(m[m[t+1]]-=m[m[t]])<1?m[t+2]:t+3;}"}
 print e}';};
