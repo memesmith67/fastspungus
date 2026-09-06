@@ -19,6 +19,6 @@ d("while",a"("b"){")
 d("switch",a"("b"){")
 d("end","}")
 d("default",a":")
-if("subleq"==$1){e="void "$1"(int *m){int t=*m;";
-e=e"*m=(m[m[t+1]]-=m[m[t]])<1?m[t+2]:t+3;}"}
+d("subleq","void "$1"(int *m){int t=*m;")
+d("subleq",e"*m=(m[m[t+1]]-=m[m[t]])<1?m[t+2]:t+3;}")
 print e}';};
