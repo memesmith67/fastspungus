@@ -3,21 +3,22 @@ fastspungus(){ awk '
 function t(x){return x~/^[a-zA-Z0-9_*]+$/?x:e}
 function n(x){return x~/^[a-zA-Z0-9_]+$/?x:e}
 function o(x){return x~/^[+\-<>\/*%&|!=]+$/?x:e}
+function d(x,y){e=x==$1?y:e}
 $0=="fastspungus"{s=!s;next}!s;s{e=";=";a=$1;b=n($2);c=n($3);
-if("function"==$1){e=t($2)" "c"("t($4)" "n($5)"){"}
-if("declare"==$1){e=t($2)" "c"=0;"}
-if("cast"==$1){e=b"=("t($3)")"n($4)";"}
-if("assign"==$1){e=b"="c o($4)n($5)";"}
-if("get"==$1){e=b"=*"c";"}
-if("set"==$1){e="*"b"="c";"}
-if("call"==$1){e=b"("c");"}
-if("assign_call"==$1){e=b"="c"("n($4)");"}
-if("case"==$1){e=a" "b":"}
-if("break"==$1){e=a";"}
-if("while"==$1){e=a"("b"){"}
-if("switch"==$1){e=a"("b"){"}
-if("end"==$1){e="}"}
-if("default"==$1){e=a":"}
-if("subleq"==$1){e="void "$1"(int *m){int t=*m;"
+d("function",t($2)" "c"("t($4)" "n($5)"){")
+d("declare",t($2)" "c"=0;")
+d("cast",b"=("t($3)")"n($4)";")
+d("assign",b"="c o($4)n($5)";")
+d("get",b"=*"c";")
+d("set","*"b"="c";")
+d("call",b"("c");")
+d("assign_call",b"="c"("n($4)");")
+d("case",a" "b":")
+d("break",a";")
+d("while",a"("b"){")
+d("switch",a"("b"){")
+d("end","}")
+d("default",a":")
+if("subleq"==$1){e="void "$1"(int *m){int t=*m;";
 e=e"*m=(m[m[t+1]]-=m[m[t]])<1?m[t+2]:t+3;}"}
 print e}';};
