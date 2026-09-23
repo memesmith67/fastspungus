@@ -11,4 +11,5 @@ f("while",a"("b"){")
 f("switch",a"("b"){")
 f("literal",$2~/^[a-z;:}]*$/?$2:e)
 f("return",a" "b";")
+d("subleq","*m=(m[m[*m+1]]-=m[m[*m]])<1?m[*m+2]:*m+3;")
 print e}
