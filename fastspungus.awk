@@ -10,4 +10,5 @@ f("case",a" "b":")
 f("while",a"("b"){")
 f("switch",a"("b"){")
 f("literal",$2~/^[a-z;:}]*$/?$2:e)
+f("return",a" "b";")
 print e}
