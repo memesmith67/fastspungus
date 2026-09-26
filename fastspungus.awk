@@ -1,10 +1,10 @@
-#©2026 john morris beck gpl2
+#©'26gpl2 john m beck
 function n(x){return $x~/^[a-z_*():]*$/?$x:e}
 function f(x,y){e=$1==x?y:e}
-{e="=";a=$1;b=n(2);c=n(3);
-f("fun",b" "c"("n(4)" "n(5)"){")
-f("var",b" "c)
-f("op",b"="c($4~/^([+\-<>\/*%&|!=]+)?$/?$4:e)n(5))
-f("ctrl",b"("c"){")
-f("literal",b)
+{e="=";a=n(2);b=n(3);
+f("f",a" "b"("n(4)" "n(5)"){")
+f("var",a" "b)
+f(e,a"="b($4~/^([+\-<>\/*%&|!=]+)?$/?$4:e)n(5))
+f("ctrl",a"("b"){")
+f("a",a)
 print e";"}
