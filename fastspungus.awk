@@ -1,1 +1,1 @@
-function n(x){return $x~/^[a-z_0-:()*.}]*$/?$x:e}function f(x,y){e=$1==x?y:e}{e=";=";a=n(2);b=n(3);print f("f",a" "b"("n(4)" "n(5)"){")f("b",a" "b)f("=",a$1b($4~/^([+\-<>\/*%&|!=]+)?$/?$4:e)n(5))f("switch",$1"("a"){")e";"}#©'26gpl2 john m beck
+function n(x){return $x~/^[a-z_0-:()*.}]*$/?$x:";="}{a=n(2);b=n(3);print ($1=="f"?a" "b"("n(4)" "n(5)"){":$1==2?a" "b:$1=="="?a$1b($4~/^([+\-<>/*%&|!=]+)?$/?$4:e)n(5):$1=="switch"?$1"("a"){":";=")";"}#©'26gpl2 john m beck
